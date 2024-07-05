@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const boardsRouter = require("./routes/api/boardsRouter");
 const app = express();
-
+const dotenv = require("dotenv");
+const boardsRouter = require("./routes/api/boardsRouter");
+dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use("/api/boards", boardsRouter);
