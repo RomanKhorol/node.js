@@ -6,6 +6,10 @@ const addBoardSchema = Joi.object({
   inProgress: Joi.array().required(),
   done: Joi.array().required(),
 });
+const upDateToDoSchema = Joi.object({
+  toDo: Joi.array().required(),
+});
 module.exports = {
   addBoardSchema,
+  upDateToDoSchema,
 };
