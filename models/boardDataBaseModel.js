@@ -1,5 +1,15 @@
 const { Schema, model } = require("mongoose");
 const handleMongooseError = require("../helpers/handleMongooseError");
+const toDoSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+});
 const boadrSchema = new Schema(
   {
     title: {
@@ -7,16 +17,16 @@ const boadrSchema = new Schema(
       required: true,
     },
     toDo: {
-      type: [{ title: String, description: String }],
+      type: [toDoSchema],
       required: true,
     },
     inProgress: {
-      type: [{ title: String, description: String }],
+      type: [toDoSchema],
 
       required: true,
     },
     done: {
-      type: [{ title: String, description: String }],
+      type: [toDoSchema],
 
       required: true,
     },
