@@ -40,5 +40,5 @@ boadrSchema.post("save", handleMongooseError);
 //так як mongoose викидає помилку без статусу, і наша мідлвара в app.js ставить код 500
 //а повинен бути код при невірних данних 400
 
-const Boadr = model("task_board", boadrSchema);
-module.exports = Boadr;
+const Board = model("task_board", boadrSchema);
+module.exports = Board;

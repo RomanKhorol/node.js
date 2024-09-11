@@ -16,6 +16,18 @@ router.patch(
   validateBody(shemas.upDateToDoSchema),
   ctrl.updateTodo
 );
+router.patch(
+  "/:id/inProgress",
+  isValidId,
+  validateBody(shemas.upDateInProgressSchema),
+  ctrl.updateTodo
+);
+router.patch(
+  "/:id/done",
+  isValidId,
+  validateBody(shemas.upDateInDoneSchema),
+  ctrl.updateTodo
+);
 
 router.put(
   "/:id",
