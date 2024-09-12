@@ -11,22 +11,10 @@ router.get("/:id", isValidId, ctrl.getById);
 
 router.post("/", validateBody(shemas.addBoardSchema), ctrl.add);
 router.patch(
-  "/:id/toDo",
+  "/:id",
   isValidId,
-  validateBody(shemas.upDateToDoSchema),
-  ctrl.updateTodo
-);
-router.patch(
-  "/:id/inProgress",
-  isValidId,
-  validateBody(shemas.upDateInProgressSchema),
-  ctrl.updateTodo
-);
-router.patch(
-  "/:id/done",
-  isValidId,
-  validateBody(shemas.upDateInDoneSchema),
-  ctrl.updateTodo
+  validateBody(shemas.upDateSchema),
+  ctrl.updateTodoInProgressDone
 );
 
 router.put(

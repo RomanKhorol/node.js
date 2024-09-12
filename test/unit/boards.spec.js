@@ -3,12 +3,15 @@ const {
   getById,
   add,
   updateById,
-  updateTodo,
+  updateTodoInProgressDone,
   deleteById,
 } = require("../../controllers/boards");
 const Board = require("../../models/boardDataBaseModel");
 jest.mock("../../models/boardDataBaseModel");
 describe("Boards", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   describe("getAll", () => {
     it("should return a list of Boards in JSON format", async () => {
       const mockBoards = [
@@ -157,5 +160,71 @@ describe("Boards", () => {
       expect(next).toHaveBeenCalled();
     });
   });
-  describe("", () => {});
+  describe("updateTodoInProgressDone ", () => {
+    it("should find by id needed Board and update needed field", async () => {
+      const mockReqBody = {
+        _id: 123,
+      };
+      const updatedBoard = {
+        _id: 123,
+      };
+      Board.findByIdAndUpdate.mockResolvedValue(updatedBoard);
+      const req = { params: mockReqBody };
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      await updateTodoInProgressDone(req, res, next);
+      expect(Board.findByIdAndUpdate).toHaveBeenCalledTimes(1);
+      expect(res.json).toHaveBeenCalledWith({ message: "Updated successfull" });
+      expect(next).not.toHaveBeenCalled();
+    });
+    it("should call next when Board not found", async () => {
+      const mockReqBody = {
+        _id: 123,
+      };
+      const updatedBoard = undefined;
+      Board.findByIdAndUpdate.mockResolvedValue(updatedBoard);
+      const req = { params: mockReqBody };
+      const res = {
+        status: jest.fn(() => res),
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      await updateById(req, res, next);
+      expect(next).toHaveBeenCalled();
+    });
+  });
+  describe("delete Board by id", () => {
+    it("should return Delete success message after successful delete ", async () => {
+      const mockReques = { _id: 123 };
+      const mockResponse = { _id: 123 };
+      Board.findByIdAndDelete.mockResolvedValue(mockResponse);
+
+      const next = jest.fn();
+      const req = { params: mockReques };
+      const res = {
+        json: jest.fn(),
+      };
+      await deleteById(req, res, next);
+      expect(Board.findByIdAndDelete).toHaveBeenCalledTimes(1);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Delete success",
+      });
+    });
+    it("should call next when Board not found", async () => {
+      const mockReqBody = {
+        _id: 123,
+      };
+      const updatedBoard = undefined;
+      Board.findByIdAndDelete.mockResolvedValue(updatedBoard);
+      const req = { params: mockReqBody };
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      await deleteById(req, res, next);
+      expect(next).toHaveBeenCalled();
+    });
+  });
 });

@@ -30,7 +30,7 @@ const updateById = async (req, res) => {
   }
   res.status(201).json(result);
 };
-const updateTodo = async (req, res) => {
+const updateTodoInProgressDone = async (req, res) => {
   const { id } = req.params;
   const result = await Board.findByIdAndUpdate(id, req.body, { new: true });
   // new: true - повертає нову версію об'єкта після оновлення
@@ -58,6 +58,6 @@ module.exports = {
   getById: ctrlWrapper(getById),
   add: ctrlWrapper(add),
   updateById: ctrlWrapper(updateById),
-  updateTodo: ctrlWrapper(updateTodo),
+  updateTodoInProgressDone: ctrlWrapper(updateTodoInProgressDone),
   deleteById: ctrlWrapper(deleteById),
 };
