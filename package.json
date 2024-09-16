@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
+    "test:e2e": "jest --testPathPattern=test/e2e --detectOpenHandles",
     "start": "node server",
     "start:dev": "nodemon server"
   },
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0"
   }
 }
