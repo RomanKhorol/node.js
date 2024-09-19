@@ -7,9 +7,9 @@ const addBoardSchema = Joi.object({
   done: Joi.array().required(),
 });
 const upDateSchema = Joi.object({
-  toDo: Joi.array().required(),
-  inProgress: Joi.array().required(),
-  done: Joi.array().required(),
+  toDo: Joi.array(),
+  inProgress: Joi.array(),
+  done: Joi.array(),
 });
 
 module.exports = {
