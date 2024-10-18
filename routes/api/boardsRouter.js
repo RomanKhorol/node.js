@@ -20,7 +20,7 @@ router.patch(
 router.put(
   "/:id",
   isValidId,
-  validateBody(shemas.addBoardSchema),
+  validateBody(shemas.upDateSchema),
   ctrl.updateById
 );
 router.delete("/:id", isValidId, ctrl.deleteById);
